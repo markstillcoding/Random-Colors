@@ -1,0 +1,55 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app__color-box--changeColor {
+  transition: all .4s;
+}
+
+body {
+  height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.page {
+  background-color: #333;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app {
+  height: 600px;
+  width: 800px;
+  background-color: #ddd;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  & .app__color-box {
+    border: 1px solid #000;
+    height: 200px;
+    width: 200px;
+    margin: auto;
+  }
+
+  & .app__title {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  & .app__btn {
+    margin: 40px auto;
+    display: block;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+  }
+}
