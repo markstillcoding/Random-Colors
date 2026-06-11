@@ -66,3 +66,14 @@ function formatNewColor(color) {
 }
 
 changeColorEl.addEventListener('click', analyzeColor)
+
+const colorAmount = document.querySelector('input');
+const value = document.querySelector('#value');
+value.textContent = colorAmount.value;
+colorAmount.addEventListener("input", (e) => {
+  value.textContent = event.target.value;
+})
+
+
+
+// reference for new router - S-375684137
