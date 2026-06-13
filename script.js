@@ -1,6 +1,7 @@
 const changeColorEl = document.querySelector('.app__btn')
 const colorBoxEl = document.querySelector('.app__color-box')
 
+
 const generatedColors = {
   rColors: [],
   gColors: [],
@@ -22,15 +23,33 @@ function createNewColor() {
   return newColor
 }
 
+function createChosenColor(color) {
+  let r = Math.floor(Math.random() * (color.red[1] - color.red[0]) + color.red[0]);
+  let g = Math.floor(Math.random() * (color.green[1] - color.green[0]) + color.green[0]);
+  let b = Math.floor(Math.random() * (color.blue[1] - color.blue[0]) + color.blue[0]);
+
+  let newColor = {
+    r,
+    g,
+    b
+  }
+
+  return newColor
+}
+
+
+
+
 let i = 1
 
-function analyzeColor() {
+function analyzeColor(newColors) {
+  console.log(newColors, "newColors")
+  const color = createChosenColor(newColors);
+  console.log(color, "color")
   setTimeout(
     () => {
-      const color = createNewColor()
-      console.log(color)
-      formatNewColor(color)
 
+      formatNewColor(color);
       if (color.r === color.g && color.r > color.b) {
         generatedColors.rColors.push(color)
       } else if (color.r === color.b && color.r > color.g) {
@@ -47,11 +66,11 @@ function analyzeColor() {
         generatedColors.sameColors.push(color)
       }
 
-      console.log(generatedColors)
+
       i++
 
       if (i < 21) {
-        analyzeColor()
+        analyzeColor(newColors)
       }
     },
 
@@ -65,14 +84,27 @@ function formatNewColor(color) {
   colorBoxEl.classList.add('app__color-box--changeColor')
 }
 
-changeColorEl.addEventListener('click', analyzeColor)
+changeColorEl.addEventListener('click', () => getRadioColors("red", "green", "blue"))
 
-const colorAmount = document.querySelector('input');
-const value = document.querySelector('#value');
-value.textContent = colorAmount.value;
-colorAmount.addEventListener("input", (e) => {
-  value.textContent = event.target.value;
-})
+
+function getRadioColors(...arguments) {
+  const newColors = {};
+  for (let arg of arguments) {
+    let radioValue = document.querySelector(`input[name="${arg}"]:checked`).value.split('-').map(Number);
+    newColors[arg] = radioValue
+  }
+
+
+
+  analyzeColor(newColors);
+}
+
+
+
+
+
+
+
 
 
 
