@@ -1,5 +1,6 @@
 const changeColorEl = document.querySelector('.app__btn')
-const colorBoxEl = document.querySelector('.app__color-box')
+const colorBoxEl = document.querySelector('.app__color-box');
+const customColorEl = document.querySelector('.custom-color');
 
 
 const generatedColors = {
@@ -43,9 +44,12 @@ function createChosenColor(color) {
 let i = 1
 
 function analyzeColor(newColors) {
-  console.log(newColors, "newColors")
-  const color = createChosenColor(newColors);
-  console.log(color, "color")
+  let color = null;
+  if (newColors !== undefined) {
+    color = createChosenColor(newColors);
+  } else {
+    color = createNewColor();
+  }
   setTimeout(
     () => {
 
@@ -69,13 +73,15 @@ function analyzeColor(newColors) {
 
       i++
 
-      if (i < 21) {
+      if (i < 11) {
         analyzeColor(newColors)
       }
     },
 
     500
   )
+  console.log(i)
+  console.log(generatedColors);
 }
 
 function formatNewColor(color) {
@@ -84,7 +90,8 @@ function formatNewColor(color) {
   colorBoxEl.classList.add('app__color-box--changeColor')
 }
 
-changeColorEl.addEventListener('click', () => getRadioColors("red", "green", "blue"))
+customColorEl.addEventListener('click', () => getRadioColors("red", "green", "blue"))
+changeColorEl.addEventListener('click', () => analyzeColor(undefined));
 
 
 function getRadioColors(...arguments) {
@@ -93,9 +100,6 @@ function getRadioColors(...arguments) {
     let radioValue = document.querySelector(`input[name="${arg}"]:checked`).value.split('-').map(Number);
     newColors[arg] = radioValue
   }
-
-
-
   analyzeColor(newColors);
 }
 

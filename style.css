@@ -12,24 +12,24 @@
 
 body {
   height: 100vh;
+  width: 100%;
   background: var(--bg);
   color: var(--fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.page {
-  background-color: #333;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .app {
-  height: 600px;
-  width: 800px;
+  height: 800px;
+  max-width: 1200px;
+  width: 100%;
   background-color: #ddd;
   display: grid;
   grid-template-columns: 1fr 1fr;
+
 }
 
 .app__color-box {
