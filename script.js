@@ -1,7 +1,7 @@
 const changeColorEl = document.querySelector(".app__btn");
 const colorBoxEl = document.querySelector(".app__color-box");
 const customColorEl = document.querySelector(".custom-color");
-
+const newModifiedColors = {}
 
 const generatedColors = {
   rColors: [],
@@ -25,52 +25,53 @@ function createNewColor() {
 }
 
 function createChosenColor(color) {
-  let r = Math.floor(
-    Math.random() * (color.red[1] - color.red[0]) + color.red[0],
-  );
-  let g = Math.floor(
-    Math.random() * (color.green[1] - color.green[0]) + color.green[0],
-  );
-  let b = Math.floor(
-    Math.random() * (color.blue[1] - color.blue[0]) + color.blue[0],
-  );
-
+  let r = Math.floor(Math.random() * (color.red[1] - color.red[0]) + color.red[0]);
+  let g = Math.floor(Math.random() * (color.green[1] - color.green[0]) + color.green[0]);
+  let b = Math.floor(Math.random() * (color.blue[1] - color.blue[0]) + color.blue[0]);
+  console.log(r, g, b)
   let newColor = {
     r,
     g,
     b,
   };
+  analyzeColor(newColor);
 
-  return newColor;
 }
 
 let i = 1;
 
 function analyzeColor(newColors) {
-  let color = null;
-  if (newColors !== undefined) {
-    color = createChosenColor(newColors);
-  } else {
-    color = createNewColor();
-  }
+  let color = newColors
+
   setTimeout(
     () => {
       formatNewColor(color);
       if (color.r === color.g && color.r > color.b) {
         generatedColors.rColors.push(color);
-      } else if (color.r === color.b && color.r > color.g) {
-        generatedColors.rColors.push(color);
-      } else if (color.b === color.g && color.b > color.r) {
-        generatedColors.bColors.push(color);
-      } else if (color.r > color.g && color.r > color.b) {
-        generatedColors.rColors.push(color);
-      } else if (color.g > color.b && color.g > color.r) {
-        generatedColors.gColors.push(color);
-      } else if (color.b > color.g && color.b > color.r) {
-        generatedColors.bColors.push(color);
-      } else {
-        generatedColors.sameColors.push(color);
       }
+
+      if (color.r === color.b && color.r > color.g) {
+        generatedColors.rColors.push(color);
+      }
+
+      if (color.b === color.g && color.b > color.r) {
+        generatedColors.bColors.push(color);
+      }
+
+      if (color.r > color.g && color.r > color.b) {
+        generatedColors.rColors.push(color);
+      }
+
+      if (color.g > color.b && color.g > color.r) {
+        generatedColors.gColors.push(color);
+      }
+
+      if (color.b > color.g && color.b > color.r) {
+        generatedColors.bColors.push(color);
+      }
+
+      generatedColors.sameColors.push(color);
+
 
       i++;
 
@@ -86,19 +87,20 @@ function analyzeColor(newColors) {
 }
 
 function formatNewColor(color) {
+  console.log(color);
   const newColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
   colorBoxEl.style.backgroundColor = newColor;
   colorBoxEl.classList.add("app__color-box--changeColor");
 }
 
-changeColorEl.addEventListener("click", () => analyzeColor(undefined));
-
+changeColorEl.addEventListener("click", () => analyzeColor());
+customColorEl.addEventListener('click', () => createChosenColor(newModifiedColors));
 
 
 // reference for new router - S-375684137
 
 const colorElements = Array.from(document.getElementsByTagName('input'));
-const newModifiedColors = {}
+
 
 
 colorElements.forEach(function (elem) {
@@ -108,4 +110,12 @@ colorElements.forEach(function (elem) {
     newModifiedColors[elem.name] = [newLow, newHigh];
   })
 })
+
+console.log(newModifiedColors);
+
+
+
+
+
+
 
