@@ -28,20 +28,29 @@ function createChosenColor(color) {
   let r = Math.floor(Math.random() * (color.red[1] - color.red[0]) + color.red[0]);
   let g = Math.floor(Math.random() * (color.green[1] - color.green[0]) + color.green[0]);
   let b = Math.floor(Math.random() * (color.blue[1] - color.blue[0]) + color.blue[0]);
-  console.log(r, g, b)
+
   let newColor = {
     r,
     g,
     b,
   };
-  analyzeColor(newColor);
-
+  return newColor
 }
 
 let i = 1;
 
 function analyzeColor(newColors) {
-  let color = newColors
+  let color;
+  if (newColors !== undefined) {
+    console.log(newColors)
+    color = createChosenColor(newColors)
+    console.log(color)
+  } else {
+    color = createNewColor();
+  }
+
+
+
 
   setTimeout(
     () => {
@@ -82,19 +91,16 @@ function analyzeColor(newColors) {
 
     500,
   );
-
-  console.log(generatedColors);
 }
 
 function formatNewColor(color) {
-  console.log(color);
   const newColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
   colorBoxEl.style.backgroundColor = newColor;
   colorBoxEl.classList.add("app__color-box--changeColor");
 }
 
-changeColorEl.addEventListener("click", () => analyzeColor());
-customColorEl.addEventListener('click', () => createChosenColor(newModifiedColors));
+changeColorEl.addEventListener("click", () => analyzeColor(undefined));
+customColorEl.addEventListener('click', () => analyzeColor(newModifiedColors));
 
 
 // reference for new router - S-375684137
@@ -111,7 +117,7 @@ colorElements.forEach(function (elem) {
   })
 })
 
-console.log(newModifiedColors);
+
 
 
 
