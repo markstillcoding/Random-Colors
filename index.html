@@ -1,4 +1,4 @@
-<!Doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -12,29 +12,17 @@
 <body>
   <div class="app">
     <section class="color-creation">
-      <h1 class="app__title">Color Finder</h1>
-      <div class="app__color-box"></div>
-      <button class="app__btn">Create Color</button>
+      <h1 class="app__title">Color Finder</h1><button class="app__btn">Create Color</button>
     </section>
     <section class="color-choices">
       <div class="events-container">
-        <div>
-          <input type="range" name="red" id="red" min="0" max="255" value="0" /><label for="red"></label>
-
+        <div><input type="range" name="red" id="red" min="0" max="255" value="0" /><label for="red"></label></div>
+        <div><input type="range" name="green" id="green" min="0" max="255" value="0" /><label for="green"></label>
         </div>
-        <div>
-          <input type="range" name="green" id="green" min="0" max="255" value="0" /><label for="green"></label>
-
-        </div>
-        <div>
-          <input type="range" name="blue" id="blue" min="0" max="255" value="0" /><label for="blue"></label>
-
-        </div>
-      </div>
-      <button class="custom-color">Create Custom Colors</button>
-
-
+        <div><input type="range" name="blue" id="blue" min="0" max="255" value="0" /><label for="blue"></label></div>
+      </div><button class="custom-color">Create Custom Colors</button>
     </section>
+    <section class="color-grid"></section>
   </div>
 </body>
 
