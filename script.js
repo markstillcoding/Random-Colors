@@ -157,9 +157,7 @@ function formatNewColor(color) {
 }
 
 changeColorEl.addEventListener('click', () => createColorArray(undefined))
-customColorEl.addEventListener('click', () =>
-  createColorArray(newModifiedColors)
-)
+customColorEl.addEventListener('click', () => createColorArray(newModifiedColors))
 
 // reference for new router - S-375684137
 
@@ -173,10 +171,25 @@ colorElements.forEach(function (elem) {
   })
 })
 
+const dialog = document.querySelector('#dialog');
+const openButton = document.querySelector("#open");
+const closeButton = document.querySelector("#close");
+const modalOverlay = document.querySelector(".modal-overlay");
+
 
 colorGridEl.addEventListener('click', e => {
   const target = e.target.closest(".app__color-box");
   if (target) {
-    console.log(e.target)
+    dialog.showModal();
   }
+  closeButton.addEventListener("click", () => {
+    dialog.close();
+  })
 })
+
+
+function showColorModal() {
+
+
+}
+
