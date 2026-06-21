@@ -108,3 +108,16 @@ body {
 dialog::backdrop {
   background-color: rgba(0, 0, 0, .3);
 }
+
+.span-white {
+  color: #fff;
+}
+
+.span-black {
+  color: #000;
+}
+
+.original-color-box {
+  width: 75px;
+  height: 75px;
+}

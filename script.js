@@ -1,9 +1,9 @@
-const changeColorEl = document.querySelector('.app__btn')
-const customColorEl = document.querySelector('.custom-color')
-const colorGridEl = document.querySelector('.color-grid')
-const newModifiedColors = {}
-const generatedColors = []
-let timer = 1
+const changeColorEl = document.querySelector('.app__btn');
+const customColorEl = document.querySelector('.custom-color');
+const colorGridEl = document.querySelector('.color-grid');
+const newModifiedColors = {};
+const generatedColors = [];
+let timer = 1;
 
 function createNewColor() {
   let r = Math.floor(Math.random() * 255) + 1
@@ -15,7 +15,7 @@ function createNewColor() {
     g,
     b
   }
-
+  console.log(newColor)
   return newColor
 }
 
@@ -129,8 +129,14 @@ function analyzeColor(newColors) {
 }
 
 function createColorBox(color) {
-  const newColorDiv = document.createElement('div')
-  const newColorSpan = document.createElement('span')
+  const newColorDiv = document.createElement('div');
+  const newColorSpan = document.createElement('span');
+  let colorValue = getTextColor(color);
+  if (colorValue < 383) {
+    newColorSpan.classList.add('span-white')
+  } else {
+    newColorSpan.classList.add('span-black')
+  }
   newColorSpan.classList.add('app__color-box-span')
   newColorDiv.classList.add('app__color-box')
   newColorSpan.textContent = `rgb(${color.r},${color.g},${color.b})`
@@ -179,17 +185,30 @@ const modalOverlay = document.querySelector(".modal-overlay");
 
 colorGridEl.addEventListener('click', e => {
   const target = e.target.closest(".app__color-box");
+  const originalColor = document.querySelector('.original-color-box')
+  originalColor.style.backgroundColor = e.target.textContent;
+
   if (target) {
     dialog.showModal();
+
   }
   closeButton.addEventListener("click", () => {
     dialog.close();
   })
 })
 
-
-function showColorModal() {
-
-
+function getTextColor(color) {
+  let totalColorValue = color.r + color.g + color.b;
+  return totalColorValue;
 }
+
+function createColorShades(color) {
+  let shade = .25;
+  let newShades = function (key) {
+    Object.keys(key).forEach(function (color) { key[color] = color * shade });
+    return newShades;
+  }
+}
+
+
 
