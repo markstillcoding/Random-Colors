@@ -1,42 +1,38 @@
 const changeColorEl = document.querySelector('.app__btn');
 const customColorEl = document.querySelector('.custom-color');
 const colorGridEl = document.querySelector('.color-grid');
-const newModifiedColors = {};
+
+const colorModalGridEl = document.querySelector('.modal-color-grid');
+const newModifiedColors = {}
+
+  ;
 const generatedColors = [];
 let timer = 1;
 
 function createNewColor() {
-  let r = Math.floor(Math.random() * 255) + 1
-  let g = Math.floor(Math.random() * 255) + 1
-  let b = Math.floor(Math.random() * 255) + 1
-
+  let r = Math.floor(Math.random() * 255) + 1;
+  let g = Math.floor(Math.random() * 255) + 1;
+  let b = Math.floor(Math.random() * 255) + 1;
   let newColor = {
     r,
     g,
     b
-  }
-  console.log(newColor)
-  return newColor
+  };
+
+  return newColor;
 }
 
 function createChosenColor(color) {
-  let r = Math.floor(
-    Math.random() * (color.red[1] - color.red[0]) + color.red[0]
-  )
-  let g = Math.floor(
-    Math.random() * (color.green[1] - color.green[0]) + color.green[0]
-  )
-  let b = Math.floor(
-    Math.random() * (color.blue[1] - color.blue[0]) + color.blue[0]
-  )
-
+  let r = Math.floor(Math.random() * (color.red[1] - color.red[0]) + color.red[0]);
+  let g = Math.floor(Math.random() * (color.green[1] - color.green[0]) + color.green[0]);
+  let b = Math.floor(Math.random() * (color.blue[1] - color.blue[0]) + color.blue[0]);
   let newColor = {
     r,
     g,
     b
-  }
+  };
 
-  return newColor
+  return newColor;
 }
 
 function createColorShades(color) { }
@@ -61,37 +57,34 @@ function createColorShades(color) { }
 function createColorArray(newColors) {
   if (newColors !== undefined) {
     color = createChosenColor(newColors)
-  } else {
+  }
+
+  else {
     color = createNewColor()
   }
 
-  setTimeout(
-    () => {
-      formatNewColor(color)
-      createColorBox(color)
-      generatedColors.push(color)
-      timer++
-
-      if (timer < 11) {
-        createColorArray(newColors)
-      }
-    },
-
-    200
-  )
-
+  setTimeout(() => {
+    formatNewColor(color);
+    createColorBox(color);
+    generatedColors.push(color);
+    timer++;
+    if (timer < 11) {
+      createColorArray(newColors);
+    }
+  }, 200)
 }
 
 function analyzeColor(newColors) {
   if (newColors !== undefined) {
     color = createChosenColor(newColors)
-  } else {
+  }
+
+  else {
     color = createNewColor()
   }
 
   setTimeout(() => {
-    formatNewColor(color)
-
+    formatNewColor(color);
     if (color.r === color.g && color.r > color.b) {
       getRedColors(color)
     }
@@ -120,62 +113,65 @@ function analyzeColor(newColors) {
       getSameColors(color)
     }
 
-    timer++
-
+    timer++;
     if (timer < 11) {
-      analyzeColor(newColors)
+      analyzeColor(newColors);
     }
-  }, 200)
+  }
+
+    , 200)
 }
 
 function createColorBox(color) {
   const newColorDiv = document.createElement('div');
   const newColorSpan = document.createElement('span');
   let colorValue = getTextColor(color);
+
   if (colorValue < 383) {
     newColorSpan.classList.add('span-white')
-  } else {
+  }
+
+  else {
     newColorSpan.classList.add('span-black')
   }
-  newColorSpan.classList.add('app__color-box-span')
-  newColorDiv.classList.add('app__color-box')
-  newColorSpan.textContent = `rgb(${color.r},${color.g},${color.b})`
-  newColorDiv.style.backgroundColor = `rgb(${color.r},${color.g},${color.b})`
-  colorGridEl.append(newColorDiv)
-  newColorDiv.append(newColorSpan)
+
+  newColorSpan.classList.add('app__color-box-span');
+  newColorDiv.classList.add('app__color-box');
+  newColorSpan.textContent = `rgb(${color.r}, ${color.g}, ${color.b})`;
+  newColorDiv.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+  colorGridEl.append(newColorDiv);
+  newColorDiv.append(newColorSpan);
+}
+
+function createModalColorBox(color) {
+  const newModalColorDiv = document.createElement('div');
+  newModalColorDiv.style.height = "40px";
+  newModalColorDiv.style.width = "40px";
+  newModalColorDiv.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`
+  colorModalGridEl.append(newModalColorDiv);
 }
 
 function formatNewColor(color) {
-  const newColor = `rgb($ {
-      color.r
-    }
-
-    , $ {
-      color.g
-    }
-
-    , $ {
-      color.b
-    }
-
-  )`
-  return newColor
+  const newColor = `rgb(${color.r}, ${color.g}, ${color.b})`
+  return newColor;
 }
 
-changeColorEl.addEventListener('click', () => createColorArray(undefined))
-customColorEl.addEventListener('click', () => createColorArray(newModifiedColors))
+changeColorEl.addEventListener('click', () => createColorArray(undefined));
+customColorEl.addEventListener('click', () => createColorArray(newModifiedColors));
 
-// reference for new router - S-375684137
 
 const colorElements = Array.from(document.getElementsByTagName('input'))
-
 colorElements.forEach(function (elem) {
   elem.addEventListener('input', function (e) {
-    const newLow = parseInt(e.target.value) - 10
-    const newHigh = parseInt(e.target.value) + 10
+    const newLow = parseInt(e.target.value) - 10;
+    const newHigh = parseInt(e.target.value) + 10;
     newModifiedColors[elem.name] = [newLow, newHigh]
-  })
-})
+  }
+
+  )
+}
+
+)
 
 const dialog = document.querySelector('#dialog');
 const openButton = document.querySelector("#open");
@@ -185,17 +181,23 @@ const modalOverlay = document.querySelector(".modal-overlay");
 
 colorGridEl.addEventListener('click', e => {
   const target = e.target.closest(".app__color-box");
-  const originalColor = document.querySelector('.original-color-box')
+  const originalColor = document.querySelector('.original-color-box');
   originalColor.style.backgroundColor = e.target.textContent;
 
   if (target) {
     dialog.showModal();
+    let newColor = createColorShades(e.target.textContent);
+    createModalColorBox(newColor);
 
   }
+
   closeButton.addEventListener("click", () => {
     dialog.close();
-  })
+  }
+
+  )
 })
+
 
 function getTextColor(color) {
   let totalColorValue = color.r + color.g + color.b;
@@ -204,11 +206,24 @@ function getTextColor(color) {
 
 function createColorShades(color) {
   let shade = .25;
-  let newShades = function (key) {
-    Object.keys(key).forEach(function (color) { key[color] = color * shade });
-    return newShades;
+
+  let newColor = color.split(',');
+  let newColors = newColor.map(item => {
+    return Math.floor(Number(item.replace(/\D/g, '')));
+  });
+  console.log(newColors)
+
+  let tints = newColors.map(color => {
+    return createTint(color);
+  })
+  console.log(tints)
+  let shadeColor = {
+    r: newColors[0], g: newColors[1], b: newColors[2]
   }
+
+  return shadeColor
 }
 
-
-
+function createTint(color) {
+  return color + (.025 * (255 - color));
+}
