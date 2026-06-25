@@ -205,8 +205,6 @@ function getTextColor(color) {
 }
 
 function createColorShades(color) {
-  let shade = .25;
-
   let newColor = color.split(',');
   let newColors = newColor.map(item => {
     return Math.floor(Number(item.replace(/\D/g, '')));
@@ -217,13 +215,14 @@ function createColorShades(color) {
     return createTint(color);
   })
   console.log(tints)
+  // shadeColor must be an array of objectx
   let shadeColor = {
     r: newColors[0], g: newColors[1], b: newColors[2]
   }
-
   return shadeColor
 }
 
-function createTint(color) {
-  return color + (.025 * (255 - color));
+function createTint(color, numShades = 5, shadeStep = .10) {
+  // need loop that increases by whatever shadestep is on every loop and loops the num of shades
+  return Math.floor(color + (.10 * (255 - color)));
 }
