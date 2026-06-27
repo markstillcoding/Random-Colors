@@ -1,3 +1,4 @@
+
 const changeColorEl = document.querySelector('.app__btn');
 const customColorEl = document.querySelector('.custom-color');
 const colorGridEl = document.querySelector('.color-grid');
@@ -144,6 +145,7 @@ function createColorBox(color) {
 }
 
 function createModalColorBox(color) {
+  console.log(color, "color")
   const newModalColorDiv = document.createElement('div');
   newModalColorDiv.style.height = "40px";
   newModalColorDiv.style.width = "40px";
@@ -209,20 +211,31 @@ function createColorShades(color) {
   let newColors = newColor.map(item => {
     return Math.floor(Number(item.replace(/\D/g, '')));
   });
-  console.log(newColors)
 
-  let tints = newColors.map(color => {
-    return createTint(color);
-  })
-  console.log(tints)
-  // shadeColor must be an array of objectx
-  let shadeColor = {
-    r: newColors[0], g: newColors[1], b: newColors[2]
-  }
-  return shadeColor
+  let tints = createTint(newColors);
+  showModalTintColors(tints);
 }
 
-function createTint(color, numShades = 5, shadeStep = .10) {
-  // need loop that increases by whatever shadestep is on every loop and loops the num of shades
-  return Math.floor(color + (.10 * (255 - color)));
+function showModalTintColors(tints) {
+  console.log(tints)
+  tints.forEach(item => {
+    let newItem = { r: item[0], g: item[1], b: item[2] }
+    createModalColorBox(newItem);
+  })
+}
+
+function createTint(color, numShades = 5, shadeStep = .15) {
+  const newShades = [];
+  let shade = [];
+  let newShade = null;
+  for (i = 0; i < 5; i++) {
+    for (j = 0; j < color.length; j++) {
+      newShade = Math.floor(color[j] + (shadeStep * (255 - color[j])));
+      shade.push(newShade);
+    }
+    newShades.push(shade);
+    shade = [];
+    shadeStep += .15;
+  }
+  return newShades
 }
