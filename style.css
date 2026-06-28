@@ -130,3 +130,9 @@ dialog::backdrop {
   width: 75px;
   height: 75px;
 }
+
+.modal-color-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

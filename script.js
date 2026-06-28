@@ -1,8 +1,11 @@
+// create random colors depending on input - DONE
+// add event listener to each new color - DONE
+// clicking on a color renders the initial color and shades of that color - DONE
+
 
 const changeColorEl = document.querySelector('.app__btn');
 const customColorEl = document.querySelector('.custom-color');
 const colorGridEl = document.querySelector('.color-grid');
-
 const colorModalGridEl = document.querySelector('.modal-color-grid');
 const newModifiedColors = {}
 
@@ -145,10 +148,9 @@ function createColorBox(color) {
 }
 
 function createModalColorBox(color) {
-  console.log(color, "color")
   const newModalColorDiv = document.createElement('div');
-  newModalColorDiv.style.height = "40px";
-  newModalColorDiv.style.width = "40px";
+  newModalColorDiv.style.height = "80px";
+  newModalColorDiv.style.width = "80px";
   newModalColorDiv.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`
   colorModalGridEl.append(newModalColorDiv);
 }
@@ -168,12 +170,8 @@ colorElements.forEach(function (elem) {
     const newLow = parseInt(e.target.value) - 10;
     const newHigh = parseInt(e.target.value) + 10;
     newModifiedColors[elem.name] = [newLow, newHigh]
-  }
-
-  )
-}
-
-)
+  })
+})
 
 const dialog = document.querySelector('#dialog');
 const openButton = document.querySelector("#open");
@@ -189,14 +187,16 @@ colorGridEl.addEventListener('click', e => {
   if (target) {
     dialog.showModal();
     let newColor = createColorShades(e.target.textContent);
-    createModalColorBox(newColor);
-
+    let shades = createTint(newColor);
+    let createShades = showModalTintColors(shades);
+    createShades?.forEach(item => {
+      createModalColorBox(item);
+    })
   }
 
   closeButton.addEventListener("click", () => {
     dialog.close();
   }
-
   )
 })
 
@@ -211,31 +211,30 @@ function createColorShades(color) {
   let newColors = newColor.map(item => {
     return Math.floor(Number(item.replace(/\D/g, '')));
   });
-
-  let tints = createTint(newColors);
-  showModalTintColors(tints);
+  return newColors;
 }
 
-function showModalTintColors(tints) {
-  console.log(tints)
-  tints.forEach(item => {
+function showModalTintColors(shades) {
+  let newShades = shades.map(item => {
     let newItem = { r: item[0], g: item[1], b: item[2] }
-    createModalColorBox(newItem);
+    return newItem;
   })
+  return newShades;
 }
 
-function createTint(color, numShades = 5, shadeStep = .15) {
+function createTint(color, numShades = 9, shadeStep = .10) {
   const newShades = [];
   let shade = [];
+  newShades.push(color);
   let newShade = null;
-  for (i = 0; i < 5; i++) {
+  for (i = 0; i < 9; i++) {
     for (j = 0; j < color.length; j++) {
       newShade = Math.floor(color[j] + (shadeStep * (255 - color[j])));
       shade.push(newShade);
     }
     newShades.push(shade);
     shade = [];
-    shadeStep += .15;
+    shadeStep += .10;
   }
   return newShades
 }
