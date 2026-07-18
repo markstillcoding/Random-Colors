@@ -222,12 +222,12 @@ function showModalTintColors(shades) {
   return newShades;
 }
 
-function createTint(color, numShades = 9, shadeStep = .10) {
+function createTint(color, numShades = 6, shadeStep = .20) {
   const newShades = [];
   let shade = [];
   newShades.push(color);
   let newShade = null;
-  for (i = 0; i < 9; i++) {
+  for (i = 0; i < numShades; i++) {
     for (j = 0; j < color.length; j++) {
       newShade = Math.floor(color[j] + (shadeStep * (255 - color[j])));
       shade.push(newShade);
