@@ -1,78 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="./src/output.css" rel="stylesheet" />
+    <script src="script.js" defer></script>
+    <title>Colors</title>
+    </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <link href="./src/output.css" rel="stylesheet">
-  <script src="script.js" defer></script>
-  <title>Colors</title>
-</head>
-
-<body>
-  <div class="grid grid-cols-12 grid-rows-2">
-    <div class="col-span-12">
-  
-      <section class="flex">
-        <h1 class="text-4xl uppercase font-display tracking-tighter">Random Colors</h1>
-        <h2>Random Colors</h2>
-        <button>Create Color</button>
-        <h2>Random Custom Colors</h2>
-        <div>
-          <div><input type="range" name="red" id="red" min="0" max="255" value="0" /><label for="red"></label></div>
-          <div><input type="range" name="green" id="green" min="0" max="255" value="0" /><label for="green"></label>
+  <body>
+    <div class="grid grid-cols-12 grid-rows-1">
+      <header class="col-span-12 row-span-1 flex justify-around items-center mb-12">
+        <h1 class="text-4xl uppercase font-display tracking-tighter">
+          Random Colors
+        </h1>
+        <fieldset>
+          <legend>Select a Color option:</legend>
+          <div><input type="radio" name="random-color" id="random-color">
+            <label for="random-color">Random Colors</label>
           </div>
-          <div><input type="range" name="blue" id="blue" min="0" max="255" value="0" /><label for="blue"></label></div>
-        </div><button class="custom-color">Create Custom Colors</button>
-    </div>
-    </section>
-  
-  
-  </div>
-  <div class="flex col-span-12 flex-wrap gap-3">
-    <div class="w-48 h-48 bg-blue-500">1</div>
-    <div class="w-48 h-48 bg-blue-500">2</div>
-    <div class="w-48 h-48 bg-blue-500">3</div>
-    <div class="w-48 h-48 bg-blue-500">4</div>
-    <div class="w-48 h-48 bg-blue-500">5</div>
-    <div class="w-48 h-48 bg-blue-500">6</div>
-    <div class="w-48 h-48 bg-blue-500">7</div>
-    <div class="w-48 h-48 bg-blue-500">8</div>
-    <div class="w-48 h-48 bg-blue-500">9</div>
-    <div class="w-48 h-48 bg-blue-500">10</div>
-    <div class="w-48 h-48 bg-blue-500">11</div>
-    <div class="w-48 h-48 bg-blue-500">12</div>
-    <div class="w-48 h-48 bg-blue-500">13</div>
-    <div class="w-48 h-48 bg-blue-500">14</div>
-    <div class="w-48 h-48 bg-blue-500">15</div>
-    <div class="w-48 h-48 bg-blue-500">16</div>
-  </div>
-  
-  
-  </div>
-  <!--<div>
-                                                              <section>
-                                                                <h1 class="app__title">Random Colors Place</h1><button class="app__btn">Create Color</button>
-    </section>
-    <section>
-      <div class="events-container">
-        <div><input type="range" name="red" id="red" min="0" max="255" value="0" /><label for="red"></label></div>
-        <div><input type="range" name="green" id="green" min="0" max="255" value="0" /><label for="green"></label>
-        </div>
-        <div><input type="range" name="blue" id="blue" min="0" max="255" value="0" /><label for="blue"></label></div>
-      </div><button class="custom-color">Create Custom Colors</button>
-    </section>
-    <section class="color-grid"></section>
-  </div>
-  <dialog id="dialog">
-    <div class="original-color-box"></div>
-    <button type="button" id="close">Close Dialog</button>
-    <div class="modal-color-grid"></div>
-  </dialog>-->
-</body>
-
+          <div><input type="radio" name="custom-random-color" id="custom-random-color">
+            <label for="custom-random-color">Custom Random Colors</label>
+          </div>
+        </fieldset>
+        <div>
+          <h2>Random Colors</h2>
+          <button class="random-color bg-black text-white p-3 rounded-md">
+            Create Color
+          </button>
+          </div>
+          <div>
+            <h2>Random Custom Colors</h2>
+            <div>
+            <input type="range" name="red" id="red" min="0" max="255" value="0" /><label for="red"></label>
+          </div>
+          <div>
+            <input type="range" name="green" id="green" min="0" max="255" value="0" /><label for="green"></label>
+          </div>
+          <div>
+            <input type="range" name="blue" id="blue" min="0" max="255" value="0" /><label for="blue"></label>
+          </div>
+          <button class="custom-color bg-black text-white p-3 rounded-md">
+            Create Custom Colors
+          </button>
+          </div>
+      </header>
+      <div class="color-grid flex col-span-12 flex-wrap gap-3"></div>
+      </div>
+  </body>
 </html>

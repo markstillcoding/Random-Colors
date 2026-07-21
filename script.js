@@ -3,7 +3,7 @@
 // clicking on a color renders the initial color and shades of that color - DONE
 
 
-const changeColorEl = document.querySelector('.app__btn');
+const randomColorEl = document.querySelector('.random-color');
 const customColorEl = document.querySelector('.custom-color');
 const colorGridEl = document.querySelector('.color-grid');
 const colorModalGridEl = document.querySelector('.modal-color-grid');
@@ -132,15 +132,15 @@ function createColorBox(color) {
   let colorValue = getTextColor(color);
 
   if (colorValue < 383) {
-    newColorSpan.classList.add('span-white')
+    newColorSpan.classList.add('text-white')
   }
 
   else {
-    newColorSpan.classList.add('span-black')
+    newColorSpan.classList.add('text-black')
   }
 
   newColorSpan.classList.add('app__color-box-span');
-  newColorDiv.classList.add('app__color-box');
+  newColorDiv.classList.add('p-4', 'size-48', 'grid', 'place-content-center');
   newColorSpan.textContent = `rgb(${color.r}, ${color.g}, ${color.b})`;
   newColorDiv.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
   colorGridEl.append(newColorDiv);
@@ -160,7 +160,7 @@ function formatNewColor(color) {
   return newColor;
 }
 
-changeColorEl.addEventListener('click', () => createColorArray(undefined));
+randomColorEl.addEventListener('click', () => createColorArray(undefined));
 customColorEl.addEventListener('click', () => createColorArray(newModifiedColors));
 
 
@@ -173,10 +173,10 @@ colorElements.forEach(function (elem) {
   })
 })
 
-const dialog = document.querySelector('#dialog');
-const openButton = document.querySelector("#open");
-const closeButton = document.querySelector("#close");
-const modalOverlay = document.querySelector(".modal-overlay");
+// const dialog = document.querySelector('#dialog');
+// const openButton = document.querySelector("#open");
+// const closeButton = document.querySelector("#close");
+// const modalOverlay = document.querySelector(".modal-overlay");
 
 
 colorGridEl.addEventListener('click', e => {
