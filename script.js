@@ -7,6 +7,8 @@ const randomColorEl = document.querySelector('.random-color');
 const customColorEl = document.querySelector('.custom-color');
 const colorGridEl = document.querySelector('.color-grid');
 const colorModalGridEl = document.querySelector('.modal-color-grid');
+const randomColorInput = document.querySelector('.rColors');
+const customColorInput = document.querySelector('.cColors');
 const newModifiedColors = {}
 
   ;
@@ -238,3 +240,18 @@ function createTint(color, numShades = 6, shadeStep = .20) {
   }
   return newShades
 }
+
+const randomForm = document.querySelector('.randomColor');
+console.log(randomForm)
+const allRadios = Array.from(document.querySelectorAll("form input[type='radio']"));
+randomForm.addEventListener('click', (event) => {
+  if (event.target && event.target.matches("input[type='radio']")) {
+    if (event.target.value === 'random') {
+      randomColorInput.classList.remove('hidden');
+    }
+    if (event.target.value === 'custom') {
+      customColorInput.classList.remove('hidden');
+    }
+
+  }
+})
