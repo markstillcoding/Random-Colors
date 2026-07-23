@@ -248,9 +248,11 @@ randomForm.addEventListener('click', (event) => {
   if (event.target && event.target.matches("input[type='radio']")) {
     if (event.target.value === 'random') {
       randomColorInput.classList.remove('hidden');
+      customColorInput.classList.add('hidden');
     }
     if (event.target.value === 'custom') {
       customColorInput.classList.remove('hidden');
+      randomColorInput.classList.add('hidden');
     }
 
   }
