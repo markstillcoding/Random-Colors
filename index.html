@@ -11,13 +11,14 @@
     <title>Colors</title>
     </head>
 
-  <body>
-    <div class="grid grid-cols-12 grid-rows-1">
-      <header class="col-span-12 row-span-1 flex justify-around items-center mb-12 pt-4">
-        <h1 class="text-4xl uppercase font-display tracking-tighter">
+  <body class="h-screen relative">
+    <div class="bg-[#0c6291] text-white">
+      <header class="flex flex-col items-center gap-y-6 mb-12 pt-10">
+        <h1 class="text-[#fbfef9] text-center text-4xl uppercase font-display tracking-tighter">
           Random Colors
         </h1>
-        <form>
+        <button class="random-color text-sky-800 bg-white rounded-lg block p-2 w-3xs">Random Colors</button>
+        <!--<form>
           <fieldset class="randomColor">
           <legend>Select a Color option:</legend>
           <div><input type="radio" name="random-answer" id="random-color" value="random">
@@ -27,10 +28,10 @@
             <label for="custom-random-color">Custom Random Colors</label>
           </div>
         </fieldset>
-        </form>
-        <div class="hidden rColors">
+        </form>-->
+        <div class="hidden">
           <h2>Random Colors</h2>
-          <button class="random-color bg-black text-white p-3 rounded-md">
+          <button class=" bg-black text-white p-3 rounded-md">
             Create Color
           </button>
           </div>
@@ -50,7 +51,17 @@
           </button>
           </div>
       </header>
-      <div class="color-grid flex col-span-12 flex-wrap gap-3"></div>
+      <div class="hidden num-colors">
+        <form class="form-inline">
+          <label for="num-colors">How many colors do you want? 1 - 100</label>
+          <input type="number" name="num-colors" id="num-colors" class="border border-black rounded bg-white outline-none" />
+        </form>
+      </div>
+      <div class="color-grid bg-[#fbfef9] flex col-span-12 flex-wrap gap-3"></div>
+      
+      </div>
+      <div
+        class="sidebar bg-cyan-500 text-white w-[300px] h-[600px] absolute transition-all duration-3000 ease-in-out opacity-0">
       </div>
   </body>
 </html>

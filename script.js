@@ -9,6 +9,8 @@ const colorGridEl = document.querySelector('.color-grid');
 const colorModalGridEl = document.querySelector('.modal-color-grid');
 const randomColorInput = document.querySelector('.rColors');
 const customColorInput = document.querySelector('.cColors');
+const numberOfColorsEl = document.querySelector('.num-colors');
+const sidebarEl = document.querySelector('.sidebar')
 const newModifiedColors = {}
 
   ;
@@ -61,6 +63,8 @@ function createColorShades(color) { }
 // }
 
 function createColorArray(newColors) {
+  sidebarEl.classList.remove('hidden');
+  sidebarEl.classList.add('right-0', 'top-[500px]', 'opacity-100');
   if (newColors !== undefined) {
     color = createChosenColor(newColors)
   }
@@ -249,6 +253,7 @@ randomForm.addEventListener('click', (event) => {
     if (event.target.value === 'random') {
       randomColorInput.classList.remove('hidden');
       customColorInput.classList.add('hidden');
+      numberOfColorsEl.classList.remove('hidden');
     }
     if (event.target.value === 'custom') {
       customColorInput.classList.remove('hidden');
