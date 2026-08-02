@@ -1,6 +1,0 @@
-@import "tailwindcss";
-@plugin "@tailwindcss/forms";
-
-@theme {
-  --font-display: "Cantarell", sans-serif;
-}

@@ -1,67 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap" rel="stylesheet" />
-    <link href="./src/output.css" rel="stylesheet" />
-    <script src="script.js" defer></script>
-    <title>Colors</title>
-    </head>
 
-  <body class="h-screen relative">
-    <div class="bg-[#0c6291] text-white">
-      <header class="flex flex-col items-center gap-y-6 mb-12 pt-10">
-        <h1 class="text-[#fbfef9] text-center text-4xl uppercase font-display tracking-tighter">
-          Random Colors
-        </h1>
-        <button class="random-color text-sky-800 bg-white rounded-lg block p-2 w-3xs">Random Colors</button>
-        <!--<form>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/6b7ce2b180.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="styles.css">
+<script src="scripts.js" defer></script>
+<title>Colors</title>
+</head>
+
+<body>
+  <!-- <button class="click">Click</button>
+  <div class="container">
+    <div class="box-size"></div>
+    <div class="box-size-2"></div>
+  </div> -->
+  <header>
+    <h1>Random Colors </h1>
+
+    <button class="menu"><i class="fa-solid fa-bars"></i></button>
+
+  </header>
+  <div class="container">
+    <div class="color-grid"></div>
+    <!-- <form>
           <fieldset class="randomColor">
-          <legend>Select a Color option:</legend>
-          <div><input type="radio" name="random-answer" id="random-color" value="random">
-            <label for="random-color">Random Colors</label>
-          </div>
-          <div><input type="radio" name="random-answer" id="custom-random-color" value="custom">
-            <label for="custom-random-color">Custom Random Colors</label>
-          </div>
+            <legend>Select a Color option:</legend>
+        <div><input type="radio" name="random-answer" id="random-color" value="random"><label for="random-color">Random
+            Colors</label></div>
+        <div><input type="radio" name="random-answer" id="custom-random-color" value="custom"><label
+            for="custom-random-color">Custom Random Colors</label></div>
         </fieldset>
-        </form>-->
-        <div class="hidden">
-          <h2>Random Colors</h2>
-          <button class=" bg-black text-white p-3 rounded-md">
-            Create Color
-          </button>
-          </div>
-          <div class="hidden cColors">
-            <h2>Random Custom Colors</h2>
-            <div>
-            <input type="range" name="red" id="red" min="0" max="255" value="0" /><label for="red"></label>
-          </div>
-          <div>
-            <input type="range" name="green" id="green" min="0" max="255" value="0" /><label for="green"></label>
-          </div>
-          <div>
-            <input type="range" name="blue" id="blue" min="0" max="255" value="0" /><label for="blue"></label>
-          </div>
-          <button class="custom-color bg-black text-white p-3 rounded-md">
-            Create Custom Colors
-          </button>
-          </div>
+      </form>
+      <div class="hidden">
+        <h2>Random Colors</h2><button class="">Create Color </button>
+        </div>
+        <div class="hidden cColors">
+          <h2>Random Custom Colors</h2>
+        <div><input type="range" name="red" id="red" min="0" max="255" value="0" /><label for="red"></label></div>
+        <div><input type="range" name="green" id="green" min="0" max="255" value="0" /><label for="green"></label></div>
+        <div><input type="range" name="blue" id="blue" min="0" max="255" value="0" /><label for="blue"></label></div>
+        <button>Create Custom Colors </button>
+        </div>
       </header>
       <div class="hidden num-colors">
-        <form class="form-inline">
-          <label for="num-colors">How many colors do you want? 1 - 100</label>
-          <input type="number" name="num-colors" id="num-colors" class="border border-black rounded bg-white outline-none" />
+        <form><label for="num-colors">How many colors do you want? 1 - 100</label><input type="number" name="num-colors"
+            id="num-colors" />
         </form>
       </div>
-      <div class="color-grid bg-[#fbfef9] flex col-span-12 flex-wrap gap-3"></div>
-      
-      </div>
-      <div
-        class="sidebar bg-cyan-500 text-white w-[300px] h-[600px] absolute transition-all duration-3000 ease-in-out opacity-0">
+      <div class=""></div>
+      </div> -->
+      <aside class="aside">
+      </aside>
       </div>
   </body>
+
 </html>
