@@ -1,22 +1,9 @@
-// const btn = document.querySelector('.click');
-// const boxSizeEl = document.querySelector('.box-size')
-// btn.addEventListener('click', () => {
-//   if (boxSizeEl.classList[1] === 'fade-in') {
-//      boxSizeEl.classList.remove('fade-in')
-//      boxSizeEl.classList.add('fade-out')
-//   } else {
-//      boxSizeEl.classList.remove('fade-out')
-//     boxSizeEl.classList.add('fade-in')   }
-// })
 
-
-
-
- const barsEl = document.querySelector('.menu')
-const asideEl = document.querySelector('.aside')
+const barsEl = document.querySelector('.menu');
+const asideEl = document.querySelector('.aside');
 // const randomColorEl = document.querySelector('.random-color')
 // const customColorEl = document.querySelector('.custom-color')
-const colorGridEl = document.querySelector('.color-grid')
+const colorGridEl = document.querySelector('.color-grid');
 // const colorModalGridEl = document.querySelector('.modal-color-grid')
 // const randomColorInput = document.querySelector('.rColors')
 // const customColorInput = document.querySelector('.cColors')
@@ -24,31 +11,31 @@ const colorGridEl = document.querySelector('.color-grid')
 // const sidebarEl = document.querySelector('.sidebar')
 // const headerEl = document.querySelector('.header')
 // const newModifiedColors = {}
-const generatedColors = []
-let timer = 1
+const generatedColors = [];
+let timer = 1;
+
 
 barsEl.addEventListener('click', () => {
   if (asideEl.classList[1] === 'fade-in') {
-    asideEl.classList.remove('fade-in')
-    asideEl.classList.add('fade-out')
-  } else {
-    asideEl.classList.remove('fade-out')
-    asideEl.classList.add('fade-in')
+    asideEl.classList.remove('fade-in');
+    asideEl.classList.add('fade-out');
+  }
+  else {
+    asideEl.classList.remove('fade-out');
+    asideEl.classList.add('fade-in');
   }
 })
 
-
 function createNewColor() {
-  let r = Math.floor(Math.random() * 255) + 1
-  let g = Math.floor(Math.random() * 255) + 1
-  let b = Math.floor(Math.random() * 255) + 1
-
+  let r = Math.floor(Math.random() * 255) + 1;
+  let g = Math.floor(Math.random() * 255) + 1;
+  let b = Math.floor(Math.random() * 255) + 1;
   let newColor = {
     r,
     g,
     b
   }
-  console.log(newColor)
+
   return newColor
 }
 
@@ -94,19 +81,22 @@ function createNewColor() {
 function createColorArray(newColors) {
   if (newColors !== undefined) {
     color = createChosenColor(newColors)
-  } else {
+  }
+
+  else {
     color = createNewColor()
   }
 
   setTimeout(() => {
-    formatNewColor(color)
-    createColorBox(color)
-    generatedColors.push(color)
-    timer++
-    if (timer < 10) {
+    formatNewColor(color);
+    createColorBox(color);
+    generatedColors.push(color);
+    timer++;
+    if (timer < 50) {
       createColorArray(newColors)
     }
-  }, 10)
+  }
+    , 10)
 }
 
 // function analyzeColor(newColors) {
@@ -159,27 +149,29 @@ function createColorArray(newColors) {
 //   )
 // }
 
-
+// Add box size animation to make it larger to show more options.
 
 function createColorBox(color) {
-  const newColorDiv = document.createElement('div')
-  const newColorSpan = document.createElement('span')
-  let colorValue = getTextColor(color)
-
-  if (colorValue < 383) {
-    newColorSpan.classList.add('text-white')
-  } else {
-    newColorSpan.classList.add('text-black')
-  }
-
-  
+  const newColorDiv = document.createElement('div');
+  const newColorSpan = document.createElement('span');
   newColorDiv.classList.add('new-color-div');
-
-  newColorSpan.textContent = `rgb(${color.r}, ${color.g}, ${color.b})`
-
-  newColorDiv.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`
-  colorGridEl.append(newColorDiv)
-  newColorDiv.append(newColorSpan)
+  newColorSpan.classList.add('new-color-span');
+  newColorDiv.addEventListener('click', () => {
+    console.log('clicked')
+  })
+  let colorValue = getTextColor(color);
+  newColorSpan.classList.add('hidden');
+  if (colorValue < 383) {
+    newColorSpan.classList.add('text-white');
+  }
+  else {
+    newColorSpan.classList.add('text-black');
+  }
+  newColorSpan.textContent = `rgb(${color.r}, ${color.g}, ${color.b})`;
+  newColorDiv.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+  colorGridEl.append(newColorDiv);
+  newColorDiv.append(newColorSpan);
+  return newColorSpan;
 }
 
 // function createModalColorBox(color) {
@@ -191,15 +183,14 @@ function createColorBox(color) {
 //   colorModalGridEl.append(newModalColorDiv)
 // }
 
- function formatNewColor(color) {
-  const newColor = `rgb(${color.r}, ${color.g}, ${color.b})`
-  return newColor
+function formatNewColor(color) {
+  const newColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+  return newColor;
 }
 
 // randomColorEl.addEventListener('click', () => createColorArray(undefined));
 // customColorEl.addEventListener('click', () => createColorArray(newModifiedColors));
-createColorArray(undefined)
-
+createColorArray(undefined);
 // const colorElements = Array.from(document.getElementsByTagName('input'))
 // colorElements.forEach(function (elem) {
 //   elem.addEventListener('input', function (e) {
@@ -213,36 +204,14 @@ createColorArray(undefined)
 // const closeButton = document.querySelector("#close");
 // const modalOverlay = document.querySelector(".modal-overlay");
 
-// colorGridEl.addEventListener('click', e => {
-//   const target = e.target.closest(".app__color-box");
-//   const originalColor = document.querySelector('.original-color-box');
-//   originalColor.style.backgroundColor = e.target.textContent;
 
-//   if (target) {
-//     dialog.showModal();
-//     let newColor = createColorShades(e.target.textContent);
-//     let shades = createTint(newColor);
-//     let createShades = showModalTintColors(shades);
 
-//     createShades?.forEach(item => {
-//       createModalColorBox(item);
-//     }
-
-//     )
-//   }
-
-//   closeButton.addEventListener("click", () => {
-//     dialog.close();
-//   }
-
-//   )
-// }
-
-// )
 function getTextColor(color) {
-  let totalColorValue = color.r + color.g + color.b
-  return totalColorValue
+  let totalColorValue = color.r + color.g + color.b;
+  return totalColorValue;
 }
+
+
 
 // function createColorShades(color) {
 //   let newColor = color.split(',')
