@@ -146,11 +146,7 @@ h1 {
   color: #fff;
 }
 
-.aside {
-  height: 0;
-  width: 100%;
-  background-color: #333;
-}
+
 .hidden {
   display: none;
 }
@@ -188,8 +184,8 @@ h1 {
 }
 
 .new-color-div {
-  height: 20vh;
-  width: 20%;
+  height: calc(100vh - 125px);
+  width: 100%;
   display: grid;
   place-content: end center;
 }
@@ -204,34 +200,42 @@ h1 {
 
 .container {
   display: flex; 
- flex-direction: column-reverse;
+ flex-direction: row;
+ width: 100%;
 }
 
 
 .color-grid {
   display: flex;
-  width: 100%;
-  flex-wrap: wrap;
+  width: 100%; 
+  flex: 1 1 auto;
+  height: 90vh;
+  
+}
+.aside {
+  height: calc(100vh - 125px);
+  background-color: #333;
+  width: 0;
 }
 
 @keyframes slide-in {
   from {
-    height: 0;
+    flex: 0 0 0px;
   }
 
   to {
-    height: 100px;
+    flex: 0 0 300px;
 
   }
 }
 
 @keyframes slide-out {
   from {
-    height: 100px;
+    flex: 0 0 300px;
   }
 
   to {
-    height: 0;
+    flex: 0 0 0;
   }
 }
 

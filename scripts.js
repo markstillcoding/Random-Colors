@@ -36,7 +36,7 @@ function createNewColor() {
     b
   }
 
-  return newColor
+  return newColor;
 }
 
 // function createChosenColor(color) {
@@ -80,11 +80,12 @@ function createNewColor() {
 
 function createColorArray(newColors) {
   if (newColors !== undefined) {
-    color = createChosenColor(newColors)
+    color = createChosenColor(newColors);
   }
 
   else {
-    color = createNewColor()
+    color = createNewColor();
+
   }
 
   setTimeout(() => {
@@ -92,8 +93,8 @@ function createColorArray(newColors) {
     createColorBox(color);
     generatedColors.push(color);
     timer++;
-    if (timer < 50) {
-      createColorArray(newColors)
+    if (timer < 9) {
+      createColorArray(newColors);
     }
   }
     , 10)
@@ -152,26 +153,30 @@ function createColorArray(newColors) {
 // Add box size animation to make it larger to show more options.
 
 function createColorBox(color) {
+  let newHex = convertToHex(color);
   const newColorDiv = document.createElement('div');
   const newColorSpan = document.createElement('span');
+  const hexColorSpan = document.createElement('span');
   newColorDiv.classList.add('new-color-div');
   newColorSpan.classList.add('new-color-span');
-  newColorDiv.addEventListener('click', () => {
-    console.log('clicked')
-  })
+  hexColorSpan.classList.add('new-color-span');
   let colorValue = getTextColor(color);
   newColorSpan.classList.add('hidden');
+  hexColorSpan.classList.add('hidden');
   if (colorValue < 383) {
     newColorSpan.classList.add('text-white');
+    hexColorSpan.classList.add('text-white');
   }
   else {
     newColorSpan.classList.add('text-black');
+    hexColorSpan.classList.add('text-black');
   }
   newColorSpan.textContent = `rgb(${color.r}, ${color.g}, ${color.b})`;
+  hexColorSpan.textContent = newHex;
   newColorDiv.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
   colorGridEl.append(newColorDiv);
   newColorDiv.append(newColorSpan);
-  return newColorSpan;
+  newColorDiv.append(hexColorSpan);
 }
 
 // function createModalColorBox(color) {
@@ -277,3 +282,59 @@ function getTextColor(color) {
 // }
 
 // )
+
+function convertToHex(color) {
+  const hexArray = []
+  const numbers = {
+    0: 0,
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    6: 6,
+    7: 7,
+    8: 8,
+    9: 9,
+    10: 'A',
+    11: 'B',
+    12: 'C',
+    13: 'D',
+    14: 'E',
+    15: 'F'
+  }
+  for (colorName in color) {
+    if (color[colorName] < 10) {
+      hexArray.push(`0${color[colorName]}`);
+    } else if (color[colorName] < 16) {
+      for (num in numbers) {
+        if (color[colorName] === Number(num)) {
+          hexArray.push(`0${numbers[num]}`)
+        }
+      }
+    } else {
+      let quotient = Math.floor(color[colorName] / 16);
+      if (quotient < 16) {
+        for (num in numbers) {
+          if (quotient === Number(num)) {
+            hexArray.push(numbers[num]);
+          }
+        }
+      }
+      let remainder = color[colorName] % 16;
+      if (remainder < 16) {
+        for (num in numbers) {
+          if (remainder === Number(num)) {
+            hexArray.push(numbers[num]);
+          }
+        }
+      }
+    }
+  }
+
+  let finalNumber = hexArray.join('');
+  console.log(`#${finalNumber}`);
+  return `#${finalNumber}`;
+}
+
+
