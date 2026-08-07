@@ -93,7 +93,7 @@ function createColorArray(newColors) {
     createColorBox(color);
     generatedColors.push(color);
     timer++;
-    if (timer < 9) {
+    if (timer < 50) {
       createColorArray(newColors);
     }
   }
@@ -284,7 +284,7 @@ function getTextColor(color) {
 // )
 
 function convertToHex(color) {
-  const hexArray = []
+  const hexArray = [];
   const numbers = {
     0: 0,
     1: 1,
@@ -304,37 +304,32 @@ function convertToHex(color) {
     15: 'F'
   }
   for (colorName in color) {
+    let quotient = Math.floor(color[colorName] / 16);
+    let remainder = color[colorName] % 16;
     if (color[colorName] < 10) {
       hexArray.push(`0${color[colorName]}`);
     } else if (color[colorName] < 16) {
-      for (num in numbers) {
-        if (color[colorName] === Number(num)) {
-          hexArray.push(`0${numbers[num]}`)
-        }
-      }
+      hexConversion(color[colorName], numbers, hexArray);
     } else {
-      let quotient = Math.floor(color[colorName] / 16);
       if (quotient < 16) {
-        for (num in numbers) {
-          if (quotient === Number(num)) {
-            hexArray.push(numbers[num]);
-          }
-        }
+        hexConversion(quotient, numbers, hexArray);
       }
-      let remainder = color[colorName] % 16;
       if (remainder < 16) {
-        for (num in numbers) {
-          if (remainder === Number(num)) {
-            hexArray.push(numbers[num]);
-          }
-        }
+        hexConversion(remainder, numbers, hexArray);
       }
     }
   }
 
   let finalNumber = hexArray.join('');
-  console.log(`#${finalNumber}`);
   return `#${finalNumber}`;
+}
+
+function hexConversion(value, numbers, arr) {
+  for (num in numbers) {
+    if (value === Number(num)) {
+      arr.push(numbers[num]);
+    }
+  }
 }
 
 
