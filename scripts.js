@@ -16,13 +16,13 @@ let timer = 1;
 
 
 barsEl.addEventListener('click', () => {
-  if (asideEl.classList[1] === 'fade-in') {
-    asideEl.classList.remove('fade-in');
-    asideEl.classList.add('fade-out');
+  if (asideEl.classList[1] === 'fade-down') {
+    asideEl.classList.remove('fade-down');
+    asideEl.classList.add('fade-up');
   }
   else {
-    asideEl.classList.remove('fade-out');
-    asideEl.classList.add('fade-in');
+    asideEl.classList.remove('fade-up');
+    asideEl.classList.add('fade-down');
   }
 })
 
@@ -93,7 +93,7 @@ function createColorArray(newColors) {
     createColorBox(color);
     generatedColors.push(color);
     timer++;
-    if (timer < 50) {
+    if (timer < 51) {
       createColorArray(newColors);
     }
   }
@@ -158,8 +158,11 @@ function createColorBox(color) {
   const newColorSpan = document.createElement('span');
   const hexColorSpan = document.createElement('span');
   newColorDiv.classList.add('new-color-div');
+  const icon = document.createElement("i");
+  icon.setAttribute("class", "fa-solid fa-circle-info");
+  icon.classList.add('hidden');
   newColorSpan.classList.add('new-color-span');
-  hexColorSpan.classList.add('new-color-span');
+  hexColorSpan.classList.add('hex-color-span');
   let colorValue = getTextColor(color);
   newColorSpan.classList.add('hidden');
   hexColorSpan.classList.add('hidden');
@@ -177,7 +180,11 @@ function createColorBox(color) {
   colorGridEl.append(newColorDiv);
   newColorDiv.append(newColorSpan);
   newColorDiv.append(hexColorSpan);
+
+  newColorDiv.appendChild(icon);
+  newColorDiv.append(icon);
 }
+
 
 // function createModalColorBox(color) {
 //   const newModalColorDiv = document.createElement('div')
@@ -192,6 +199,10 @@ function formatNewColor(color) {
   const newColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
   return newColor;
 }
+
+colorGridEl.addEventListener('click', (e) => {
+  console.log('hello');
+})
 
 // randomColorEl.addEventListener('click', () => createColorArray(undefined));
 // customColorEl.addEventListener('click', () => createColorArray(newModifiedColors));

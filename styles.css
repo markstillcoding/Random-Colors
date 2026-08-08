@@ -135,8 +135,8 @@ table {
 header {
   background-color: #000;
   padding: 20px;
-  position: relative;
-
+  position: fixed;
+ width: 100%;
 }
 
 h1 {
@@ -151,12 +151,12 @@ h1 {
   display: none;
 }
 
-.fade-in {
-  animation: slide-in .8s ease-in-out forwards;
+.fade-down {
+  animation: slide-down .8s ease-in-out forwards;
 }
 
-.fade-out {
-  animation: slide-out .8s ease-in-out forwards;
+.fade-up {
+  animation: slide-up .8s ease-in-out forwards;
 }
 
 .btn {
@@ -167,7 +167,7 @@ h1 {
 .menu {
   background: transparent;
   border: none;
-  margin-left: auto;
+  margin: 0 50px 0 auto;
   display: block;
 }
 
@@ -184,65 +184,78 @@ h1 {
 }
 
 .new-color-div {
-  height: calc(20vh - 125px);
- 
-  width: 100%;
+  position: relative;
+  width: 200px;
+  height: 200px;
   display: grid;
-  place-content: end center;
+  place-content: center;
+  flex: 1 0 auto;
 }
-.new-color-span {
-  font-size: 24px;
+.new-color-span, .hex-color-span {
+  font-size: 15px;
   text-transform: uppercase;
+  text-align: center;
+  
 }
-.new-color-div:hover .new-color-span {
+.new-color-span {margin-bottom: 10px;}
+.new-color-div:hover .new-color-span, .new-color-div:hover .hex-color-span, .new-color-div:hover .fa-circle-info {
   display: block;
 }
 
 
 .container {
   display: flex; 
- flex-direction: row;
+ flex-direction: column-reverse;
  width: 100%;
+
+}
+
+.fa-circle-info {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%);
 }
 
 
 .color-grid {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   width: 100%;
   gap: 0;
-  height: 100vh;
-  /* display: flex;
+  height: 100vh; */
+  display: flex;
   width: 100%; 
   flex: 1 1 auto;
-  height: 90vh;
-  flex-wrap: wrap; */
+  height: 80vh;
+  gap: 5px;
+  flex-wrap: wrap;
+margin-top: 125px;
 }
 .aside {
-  height: calc(100vh - 125px);
+  width: 100%;
   background-color: #333;
-  width: 0;
 }
 
-@keyframes slide-in {
+@keyframes slide-down {
   from {
-    flex: 0 0 0px;
+    height: 0;
   }
 
   to {
-    flex: 0 0 300px;
+    height: 100px;
 
   }
 }
 
-@keyframes slide-out {
+@keyframes slide-up {
   from {
-    flex: 0 0 300px;
+    height: 100px;
   }
 
   to {
-    flex: 0 0 0;
+    height: 0;
   }
 }
 
