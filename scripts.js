@@ -4,7 +4,7 @@ const asideEl = document.querySelector('.aside');
 // const randomColorEl = document.querySelector('.random-color')
 // const customColorEl = document.querySelector('.custom-color')
 const colorGridEl = document.querySelector('.color-grid');
-// const colorModalGridEl = document.querySelector('.modal-color-grid')
+const colorModalGridEl = document.querySelector('.modal-color-grid')
 // const randomColorInput = document.querySelector('.rColors')
 // const customColorInput = document.querySelector('.cColors')
 // const numberOfColorsEl = document.querySelector('.num-colors')
@@ -186,6 +186,8 @@ function createColorBox(color) {
 }
 
 
+
+
 // function createModalColorBox(color) {
 //   const newModalColorDiv = document.createElement('div')
 //   newModalColorDiv.style.height = '80px'
@@ -200,8 +202,21 @@ function formatNewColor(color) {
   return newColor;
 }
 
+const dialog = document.querySelector('#dialog');
+
+const closeButton = document.querySelector(".close");
+const modalOverlay = document.querySelector(".modal-overlay");
+
 colorGridEl.addEventListener('click', (e) => {
-  console.log('hello');
+  const target = e.target.closest(".fa-circle-info");
+  if (target) {
+    console.log(dialog);
+    dialog.showModal();
+  }
+})
+
+closeButton.addEventListener("click", () => {
+  dialog.close();
 })
 
 // randomColorEl.addEventListener('click', () => createColorArray(undefined));
@@ -215,10 +230,7 @@ createColorArray(undefined);
 //     newModifiedColors[elem.name] = [newLow, newHigh]
 //   })
 // })
-// const dialog = document.querySelector('#dialog');
-// const openButton = document.querySelector("#open");
-// const closeButton = document.querySelector("#close");
-// const modalOverlay = document.querySelector(".modal-overlay");
+
 
 
 
