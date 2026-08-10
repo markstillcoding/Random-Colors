@@ -161,6 +161,7 @@ function createColorBox(color) {
   const icon = document.createElement("i");
   icon.setAttribute("class", "fa-solid fa-circle-info");
   icon.classList.add('hidden');
+  icon.focus();
   newColorSpan.classList.add('new-color-span');
   hexColorSpan.classList.add('hex-color-span');
   let colorValue = getTextColor(color);
