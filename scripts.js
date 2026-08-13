@@ -93,7 +93,7 @@ function createColorArray(newColors) {
     createColorBox(color);
     generatedColors.push(color);
     timer++;
-    if (timer < 51) {
+    if (timer < 41) {
       createColorArray(newColors);
     }
   }
@@ -150,7 +150,7 @@ function createColorArray(newColors) {
 //   )
 // }
 
-// Add box size animation to make it larger to show more options.
+
 
 function createColorBox(color) {
   let newHex = convertToHex(color);
@@ -161,19 +161,18 @@ function createColorBox(color) {
   const icon = document.createElement("i");
   icon.setAttribute("class", "fa-solid fa-circle-info");
   icon.classList.add('hidden');
-  icon.focus();
   newColorSpan.classList.add('new-color-span');
   hexColorSpan.classList.add('hex-color-span');
   let colorValue = getTextColor(color);
   newColorSpan.classList.add('hidden');
   hexColorSpan.classList.add('hidden');
-  if (colorValue < 383) {
-    newColorSpan.classList.add('text-white');
-    hexColorSpan.classList.add('text-white');
-  }
-  else {
+  if (colorValue > 186) {
     newColorSpan.classList.add('text-black');
     hexColorSpan.classList.add('text-black');
+  }
+  else {
+    newColorSpan.classList.add('text-white');
+    hexColorSpan.classList.add('text-white');
   }
   newColorSpan.textContent = `rgb(${color.r}, ${color.g}, ${color.b})`;
   hexColorSpan.textContent = newHex;
@@ -181,22 +180,12 @@ function createColorBox(color) {
   colorGridEl.append(newColorDiv);
   newColorDiv.append(newColorSpan);
   newColorDiv.append(hexColorSpan);
-
   newColorDiv.appendChild(icon);
-  newColorDiv.append(icon);
 }
 
 
 
 
-// function createModalColorBox(color) {
-//   const newModalColorDiv = document.createElement('div')
-//   newModalColorDiv.style.height = '80px'
-//   newModalColorDiv.style.width = '80px'
-
-//   newModalColorDiv.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`
-//   colorModalGridEl.append(newModalColorDiv)
-// }
 
 function formatNewColor(color) {
   const newColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
@@ -210,14 +199,42 @@ const modalOverlay = document.querySelector(".modal-overlay");
 
 colorGridEl.addEventListener('click', (e) => {
   const target = e.target.closest(".fa-circle-info");
-  if (target) {
-    console.log(dialog);
+  const activeDiv = e.target.closest(".new-color-div");
+  activeDiv.classList.add('active');
+  if (!target) {
+    activeDiv.classList.remove('active');
+    return;
+  } else {
+    const rgbTarget = document.querySelector(".active .new-color-span");
+    const hexTarget = document.querySelector(".active .hex-color-span");
+    const OGColor = document.querySelector(".original-color");
+    const compColor = document.querySelector(".comp-color");
+    const rgbColor = document.querySelector(".rgb-color");
+    const hexColor = document.querySelector(".hex-color");
+    const compRgbColor = document.querySelector(".comp-rgb-color");
+    const compHexColor = document.querySelector(".comp-hex-color");
     dialog.showModal();
+    let rgb = (rgbTarget.textContent).replace('rgb(', '').replace(')', '').replace(/\s+/g, '').split(',');
+    const rgbFormatted = { r: rgb[0], g: rgb[1], b: rgb[2] };
+
+
+    let { newCompColor, newHex } = createComplimentaryColor(rgbFormatted);
+
+    OGColor.style.backgroundColor = rgbTarget.textContent;
+    compColor.style.backgroundColor = `rgb(${newCompColor.red}, ${newCompColor.green}, ${newCompColor.blue})`;
+    rgbColor.append(rgbTarget.textContent);
+    hexColor.append(hexTarget.textContent);
+    compRgbColor.append(`rgb(${newCompColor.red}, ${newCompColor.green}, ${newCompColor.blue})`);
+    compHexColor.append(newHex);
+
   }
 })
 
 closeButton.addEventListener("click", () => {
+  const currentActiveDiv = document.querySelector('.new-color-div.active')
+  currentActiveDiv.classList.remove('active');
   dialog.close();
+
 })
 
 // randomColorEl.addEventListener('click', () => createColorArray(undefined));
@@ -236,8 +253,7 @@ createColorArray(undefined);
 
 
 function getTextColor(color) {
-  let totalColorValue = color.r + color.g + color.b;
-  return totalColorValue;
+  return color.r * .299 + color.g * .587 + color.b * .114;
 }
 
 
@@ -307,6 +323,8 @@ function getTextColor(color) {
 
 // )
 
+
+
 function convertToHex(color) {
   const hexArray = [];
   const numbers = {
@@ -330,20 +348,11 @@ function convertToHex(color) {
   for (colorName in color) {
     let quotient = Math.floor(color[colorName] / 16);
     let remainder = color[colorName] % 16;
-    if (color[colorName] < 10) {
-      hexArray.push(`0${color[colorName]}`);
-    } else if (color[colorName] < 16) {
-      hexConversion(color[colorName], numbers, hexArray);
-    } else {
-      if (quotient < 16) {
-        hexConversion(quotient, numbers, hexArray);
-      }
-      if (remainder < 16) {
-        hexConversion(remainder, numbers, hexArray);
-      }
-    }
+    let quotientFinal = hexConversion(quotient, numbers, hexArray);
+    hexArray.push(quotientFinal);
+    let remainderFinal = hexConversion(remainder, numbers, hexArray);
+    hexArray.push(remainderFinal);
   }
-
   let finalNumber = hexArray.join('');
   return `#${finalNumber}`;
 }
@@ -355,5 +364,20 @@ function hexConversion(value, numbers, arr) {
     }
   }
 }
+
+function createComplimentaryColor(color) {
+  let red = 255 - color.r;
+  let green = 255 - color.g;
+  let blue = 255 - color.b;
+  let newCompColor = { red, green, blue }
+  let newHex = convertToHex(newCompColor);
+  return {
+    newCompColor,
+    newHex
+  }
+}
+
+let sample = { r: 50, g: 150, b: 250 };
+createComplimentaryColor(sample);
 
 
