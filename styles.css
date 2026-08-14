@@ -277,6 +277,18 @@ h1 {
 .original-color, .comp-color {
   height: 150px;
   width: 250px;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.original-color .rgb-color, .comp-color .comp-rgb-color {
+  color: #fff;
+}
+.comp-color .hex-color, .comp-color .comp-hex-color {
+  color: #000;
 }
 
 

@@ -231,7 +231,15 @@ colorGridEl.addEventListener('click', (e) => {
 })
 
 closeButton.addEventListener("click", () => {
-  const currentActiveDiv = document.querySelector('.new-color-div.active')
+  const currentActiveDiv = document.querySelector('.new-color-div.active');
+  const rgbColor = document.querySelector(".rgb-color");
+  const hexColor = document.querySelector(".hex-color");
+  const compRgbColor = document.querySelector(".comp-rgb-color");
+  const compHexColor = document.querySelector(".comp-hex-color");
+  rgbColor.textContent = '';
+  hexColor.textContent = '';
+  compRgbColor.textContent = '';
+  compHexColor.textContent = '';
   currentActiveDiv.classList.remove('active');
   dialog.close();
 
