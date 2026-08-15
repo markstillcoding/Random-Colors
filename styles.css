@@ -311,12 +311,16 @@ h1 {
 .original-color-shades {
   grid-area: ocs;
   display: flex;
-  
+}
+.original-color-shades > div, .comp-color-shades > div {
+  height: 150px;
+  width: 150px;
 }
 .comp-color-shades {
   grid-area: ccs;
   display: flex;
 }
+
 
 
 

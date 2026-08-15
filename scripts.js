@@ -1,4 +1,3 @@
-
 const barsEl = document.querySelector('.menu');
 const asideEl = document.querySelector('.aside');
 // const randomColorEl = document.querySelector('.random-color')
@@ -215,10 +214,24 @@ colorGridEl.addEventListener('click', (e) => {
     const compHexColor = document.querySelector(".comp-hex-color");
     dialog.showModal();
     let rgb = (rgbTarget.textContent).replace('rgb(', '').replace(')', '').replace(/\s+/g, '').split(',');
-    const rgbFormatted = { r: rgb[0], g: rgb[1], b: rgb[2] };
-
-
+    const rgbFormatted = { r: Number(rgb[0]), g: Number(rgb[1]), b: Number(rgb[2]) };
     let { newCompColor, newHex } = createComplimentaryColor(rgbFormatted);
+    let rgbFormattedValues = Object.values(rgbFormatted);
+    let newCompColorValues = Object.values(newCompColor);
+    let newOriginalTintColors = createTint(rgbFormattedValues);
+    newOriginalTintColors.map((num) => {
+      const newDiv = document.createElement('div');
+      const originalColorShadesContainer = document.querySelector('.original-color-shades');
+      newDiv.style.backgroundColor = `rgb(${num[0]}, ${num[1]}, ${num[2]})`
+      originalColorShadesContainer.append(newDiv);
+    })
+    let newCompTintColors = createTint(newCompColorValues);
+    newCompTintColors.map((num) => {
+      const newDiv = document.createElement('div');
+      const compColorShadesContainer = document.querySelector('.comp-color-shades');
+      newDiv.style.backgroundColor = `rgb(${num[0]}, ${num[1]}, ${num[2]})`;
+      compColorShadesContainer.append(newDiv);
+    })
 
     OGColor.style.backgroundColor = rgbTarget.textContent;
     compColor.style.backgroundColor = `rgb(${newCompColor.red}, ${newCompColor.green}, ${newCompColor.blue})`;
@@ -236,6 +249,10 @@ closeButton.addEventListener("click", () => {
   const hexColor = document.querySelector(".hex-color");
   const compRgbColor = document.querySelector(".comp-rgb-color");
   const compHexColor = document.querySelector(".comp-hex-color");
+  const originalColorShadesContainer = document.querySelector('.original-color-shades');
+  const compColorShadesContainer = document.querySelector('.comp-color-shades');
+  originalColorShadesContainer.textContent = '';
+  compColorShadesContainer.textContent = '';
   rgbColor.textContent = '';
   hexColor.textContent = '';
   compRgbColor.textContent = '';
@@ -288,48 +305,29 @@ function getTextColor(color) {
 //   return newShades
 // }
 
-// function createTint(color, numShades = 6, shadeStep = 0.2) {
-//   const newShades = []
-//   let shade = []
-//   newShades.push(color)
-//   let newShade = null
+function createTint(color, numShades = 4, shadeStep = 0.2) {
+  const newShades = []
+  let shade = []
+  newShades.push(color)
+  let newShade = null
 
-//   for (i = 0; i < numShades; i++) {
-//     for (j = 0; j < color.length; j++) {
-//       newShade = Math.floor(color[j] + shadeStep * (255 - color[j]))
-//       shade.push(newShade)
-//     }
+  for (i = 0; i < numShades; i++) {
+    for (j = 0; j < color.length; j++) {
+      newShade = Math.floor(color[j] + shadeStep * (255 - color[j]))
+      shade.push(newShade)
+    }
 
-//     newShades.push(shade)
-//     shade = []
-//     shadeStep += 0.1
-//   }
+    newShades.push(shade)
+    shade = []
+    shadeStep += 0.1
+  }
 
-//   return newShades
-// }
+  return newShades
+}
 
-// const randomForm = document.querySelector('.randomColor')
-// const allRadios = Array.from(
-//   document.querySelectorAll("form input[type='radio']")
-// )
 
-// randomForm.addEventListener('click', (event) => {
-//   if (event.target && event.target.matches("input[type='radio']")) {
-//     if (event.target.value === 'random') {
-//       randomColorInput.classList.remove('hidden');
-//       customColorInput.classList.add('hidden');
-//       numberOfColorsEl.classList.remove('hidden');
-//     }
 
-//     if (event.target.value === 'custom') {
-//       customColorInput.classList.remove('hidden');
-//       randomColorInput.classList.add('hidden');
-//     }
 
-//   }
-// }
-
-// )
 
 
 
