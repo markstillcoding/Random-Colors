@@ -1,18 +1,9 @@
 const barsEl = document.querySelector('.menu');
 const asideEl = document.querySelector('.aside');
-// const randomColorEl = document.querySelector('.random-color')
-// const customColorEl = document.querySelector('.custom-color')
 const colorGridEl = document.querySelector('.color-grid');
 const colorModalGridEl = document.querySelector('.modal-color-grid')
-// const randomColorInput = document.querySelector('.rColors')
-// const customColorInput = document.querySelector('.cColors')
-// const numberOfColorsEl = document.querySelector('.num-colors')
-// const sidebarEl = document.querySelector('.sidebar')
-// const headerEl = document.querySelector('.header')
-// const newModifiedColors = {}
 const generatedColors = [];
 let timer = 1;
-
 
 barsEl.addEventListener('click', () => {
   if (asideEl.classList[1] === 'fade-down') {
@@ -34,7 +25,6 @@ function createNewColor() {
     g,
     b
   }
-
   return newColor;
 }
 
@@ -81,10 +71,8 @@ function createColorArray(newColors) {
   if (newColors !== undefined) {
     color = createChosenColor(newColors);
   }
-
   else {
     color = createNewColor();
-
   }
 
   setTimeout(() => {
@@ -262,50 +250,13 @@ closeButton.addEventListener("click", () => {
 
 })
 
-// randomColorEl.addEventListener('click', () => createColorArray(undefined));
-// customColorEl.addEventListener('click', () => createColorArray(newModifiedColors));
 createColorArray(undefined);
-// const colorElements = Array.from(document.getElementsByTagName('input'))
-// colorElements.forEach(function (elem) {
-//   elem.addEventListener('input', function (e) {
-//     const newLow = parseInt(e.target.value) - 10
-//     const newHigh = parseInt(e.target.value) + 10
-//     newModifiedColors[elem.name] = [newLow, newHigh]
-//   })
-// })
-
-
-
 
 function getTextColor(color) {
   return color.r * .299 + color.g * .587 + color.b * .114;
 }
 
-
-
-// function createColorShades(color) {
-//   let newColor = color.split(',')
-
-//   let newColors = newColor.map(item => {
-//     return Math.floor(Number(item.replace(/\D/g, '')))
-//   })
-//   return newColors
-// }
-
-// function showModalTintColors(shades) {
-//   let newShades = shades.map(item => {
-//     let newItem = {
-//       r: item[0],
-//       g: item[1],
-//       b: item[2]
-//     }
-
-//     return newItem
-//   })
-//   return newShades
-// }
-
-function createTint(color, numShades = 4, shadeStep = 0.2) {
+function createTint(color, numShades = 4, shadeStep = 0.1) {
   const newShades = []
   let shade = []
   newShades.push(color)
@@ -316,20 +267,12 @@ function createTint(color, numShades = 4, shadeStep = 0.2) {
       newShade = Math.floor(color[j] + shadeStep * (255 - color[j]))
       shade.push(newShade)
     }
-
     newShades.push(shade)
     shade = []
     shadeStep += 0.1
   }
-
   return newShades
 }
-
-
-
-
-
-
 
 function convertToHex(color) {
   const hexArray = [];
@@ -383,7 +326,6 @@ function createComplimentaryColor(color) {
   }
 }
 
-let sample = { r: 50, g: 150, b: 250 };
-createComplimentaryColor(sample);
+
 
 

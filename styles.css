@@ -242,7 +242,7 @@ h1 {
 
 
 #dialog {
-  max-width: 1000px;
+  max-width: 1200px;
   width: 100%;
   border: none;
   
@@ -297,22 +297,24 @@ h1 {
 }
 .chosen-color-container {
   display: grid;
-  gap: 2px;
+  gap: 10px;
   grid-template-areas: 
   "oc ocs"
   "cc ccs"
 }
 .original-color {
   grid-area: oc;
+  margin-right: 50px;
 }
 .comp-color {
   grid-area: cc;
+  margin-right: 50px;
 }
 .original-color-shades {
   grid-area: ocs;
   display: flex;
 }
-.original-color-shades > div, .comp-color-shades > div {
+.original-color-shades > div, .comp-color-shades > div  {
   height: 150px;
   width: 150px;
 }
@@ -330,14 +332,14 @@ h1 {
   }
 
   to {
-    height: 100px;
+    height: 150px;
 
   }
 }
 
 @keyframes slide-up {
   from {
-    height: 100px;
+    height: 150px;
   }
 
   to {
