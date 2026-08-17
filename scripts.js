@@ -3,6 +3,8 @@ const asideEl = document.querySelector('.aside');
 const colorGridEl = document.querySelector('.color-grid');
 const colorModalGridEl = document.querySelector('.modal-color-grid')
 const generatedColors = [];
+console.log(generatedColors);
+let colorBoxAttr = 0;
 let timer = 1;
 
 barsEl.addEventListener('click', () => {
@@ -25,6 +27,7 @@ function createNewColor() {
     g,
     b
   }
+  generatedColors.push(newColor)
   return newColor;
 }
 
@@ -78,9 +81,8 @@ function createColorArray(newColors) {
   setTimeout(() => {
     formatNewColor(color);
     createColorBox(color);
-    generatedColors.push(color);
     timer++;
-    if (timer < 41) {
+    if (timer < 43) {
       createColorArray(newColors);
     }
   }
@@ -145,29 +147,18 @@ function createColorBox(color) {
   const newColorSpan = document.createElement('span');
   const hexColorSpan = document.createElement('span');
   newColorDiv.classList.add('new-color-div');
+  newColorDiv.setAttribute("color-box-number", colorBoxAttr++)
   const icon = document.createElement("i");
   icon.setAttribute("class", "fa-solid fa-circle-info");
   icon.classList.add('hidden');
-  newColorSpan.classList.add('new-color-span');
-  hexColorSpan.classList.add('hex-color-span');
-  let colorValue = getTextColor(color);
-  newColorSpan.classList.add('hidden');
-  hexColorSpan.classList.add('hidden');
-  if (colorValue > 186) {
-    newColorSpan.classList.add('text-black');
-    hexColorSpan.classList.add('text-black');
-  }
-  else {
-    newColorSpan.classList.add('text-white');
-    hexColorSpan.classList.add('text-white');
-  }
+  newColorSpan.classList.add('new-color-span', 'hidden');
+  hexColorSpan.classList.add('hex-color-span', 'hidden');
+  getTextColor(color, newColorSpan, hexColorSpan)
   newColorSpan.textContent = `rgb(${color.r}, ${color.g}, ${color.b})`;
   hexColorSpan.textContent = newHex;
   newColorDiv.style.backgroundColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
   colorGridEl.append(newColorDiv);
-  newColorDiv.append(newColorSpan);
-  newColorDiv.append(hexColorSpan);
-  newColorDiv.appendChild(icon);
+  newColorDiv.append(newColorSpan, hexColorSpan, icon);
 }
 
 
@@ -200,29 +191,25 @@ colorGridEl.addEventListener('click', (e) => {
     const hexColor = document.querySelector(".hex-color");
     const compRgbColor = document.querySelector(".comp-rgb-color");
     const compHexColor = document.querySelector(".comp-hex-color");
-    dialog.showModal();
-    let rgb = (rgbTarget.textContent).replace('rgb(', '').replace(')', '').replace(/\s+/g, '').split(',');
-    const rgbFormatted = { r: Number(rgb[0]), g: Number(rgb[1]), b: Number(rgb[2]) };
-    let { newCompColor, newHex } = createComplimentaryColor(rgbFormatted);
-    let rgbFormattedValues = Object.values(rgbFormatted);
-    let newCompColorValues = Object.values(newCompColor);
-    let newOriginalTintColors = createTint(rgbFormattedValues);
-    newOriginalTintColors.map((num) => {
-      const newDiv = document.createElement('div');
-      const originalColorShadesContainer = document.querySelector('.original-color-shades');
-      newDiv.style.backgroundColor = `rgb(${num[0]}, ${num[1]}, ${num[2]})`
-      originalColorShadesContainer.append(newDiv);
-    })
-    let newCompTintColors = createTint(newCompColorValues);
-    newCompTintColors.map((num) => {
-      const newDiv = document.createElement('div');
-      const compColorShadesContainer = document.querySelector('.comp-color-shades');
-      newDiv.style.backgroundColor = `rgb(${num[0]}, ${num[1]}, ${num[2]})`;
-      compColorShadesContainer.append(newDiv);
-    })
 
-    OGColor.style.backgroundColor = rgbTarget.textContent;
+    dialog.showModal();
+
+    let rgb1 = activeDiv.getAttribute("color-box-number");
+    let clickedNumber = generatedColors[rgb1];
+    console.log(clickedNumber);
+    let { newCompColor, newHex } = createComplimentaryColor(clickedNumber);
+    // add to function
+    let rgbFormattedValues = Object.values(clickedNumber);
+    let newCompColorValues = Object.values(newCompColor);
+    // add to function
+    let newOriginalTintColors = createTint(rgbFormattedValues);
+    let newCompTintColors = createTint(newCompColorValues);
+    addTints(newOriginalTintColors, '.original-color-shades');
+    addTints(newCompTintColors, '.comp-color-shades');
+    // add to function
+    OGColor.style.backgroundColor = `rgb(${clickedNumber.r}, ${clickedNumber.g}, ${clickedNumber.b})`;
     compColor.style.backgroundColor = `rgb(${newCompColor.red}, ${newCompColor.green}, ${newCompColor.blue})`;
+    // add to functioin
     rgbColor.append(rgbTarget.textContent);
     hexColor.append(hexTarget.textContent);
     compRgbColor.append(`rgb(${newCompColor.red}, ${newCompColor.green}, ${newCompColor.blue})`);
@@ -230,6 +217,17 @@ colorGridEl.addEventListener('click', (e) => {
 
   }
 })
+
+function addTints(arr, shade, container) {
+  arr.map((num) => {
+    const newDiv = document.createElement('div');
+    const container = document.querySelector(shade);
+    newDiv.style.backgroundColor = `rgb(${num[0]}, ${num[1]}, ${num[2]})`
+    container.append(newDiv);
+  })
+}
+
+
 
 closeButton.addEventListener("click", () => {
   const currentActiveDiv = document.querySelector('.new-color-div.active');
@@ -239,12 +237,8 @@ closeButton.addEventListener("click", () => {
   const compHexColor = document.querySelector(".comp-hex-color");
   const originalColorShadesContainer = document.querySelector('.original-color-shades');
   const compColorShadesContainer = document.querySelector('.comp-color-shades');
-  originalColorShadesContainer.textContent = '';
-  compColorShadesContainer.textContent = '';
-  rgbColor.textContent = '';
-  hexColor.textContent = '';
-  compRgbColor.textContent = '';
-  compHexColor.textContent = '';
+  const itemsToClear = [originalColorShadesContainer, compColorShadesContainer, rgbColor, hexColor, compRgbColor, compHexColor];
+  itemsToClear.map(item => item.textContent = '');
   currentActiveDiv.classList.remove('active');
   dialog.close();
 
@@ -252,14 +246,21 @@ closeButton.addEventListener("click", () => {
 
 createColorArray(undefined);
 
-function getTextColor(color) {
-  return color.r * .299 + color.g * .587 + color.b * .114;
+function getTextColor(color, originalSpan, hexSpan) {
+  let colorNum = color.r * .299 + color.g * .587 + color.b * .114;
+  if (colorNum > 186) {
+    originalSpan.classList.add('text-black');
+    hexSpan.classList.add('text-black');
+  }
+  else {
+    originalSpan.classList.add('text-white');
+    hexSpan.classList.add('text-white');
+  }
 }
 
-function createTint(color, numShades = 4, shadeStep = 0.1) {
+function createTint(color, numShades = 5, shadeStep = 0.1) {
   const newShades = []
   let shade = []
-  newShades.push(color)
   let newShade = null
 
   for (i = 0; i < numShades; i++) {
