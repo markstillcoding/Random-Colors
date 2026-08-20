@@ -1,22 +1,57 @@
 const barsEl = document.querySelector('.menu');
 const asideEl = document.querySelector('.aside');
 const colorGridEl = document.querySelector('.color-grid');
-const colorModalGridEl = document.querySelector('.modal-color-grid')
+const colorModalGridEl = document.querySelector('.modal-color-grid');
+const inputRanges = document.querySelector('.input-ranges');
+const redInput = document.getElementById('red_input')
+const greenInput = document.getElementById('green_input')
+const blueInput = document.getElementById('blue_input')
+const asideContainer = document.querySelector('.aside-container');
 const generatedColors = [];
-console.log(generatedColors);
+const customColors = {};
+console.log(customColors);
 let colorBoxAttr = 0;
 let timer = 1;
+let redRange = 0;
+let greenRange = 0;
+let blueRange = 0;
+const customBox = document.querySelector('.custom-box');
+
+
+
+inputRanges.addEventListener('input', (e) => {
+  if (e.target === redInput) {
+    redRange = e.target.value;
+  }
+  if (e.target === greenInput) {
+    greenRange = e.target.value;
+  }
+  if (e.target === blueInput) {
+    blueRange = e.target.value;
+  }
+  const customColorRange = `rgb(${redRange}, ${greenRange}, ${blueRange})`;
+  customBox.style.backgroundColor = customColorRange;
+});
+
 
 barsEl.addEventListener('click', () => {
-  if (asideEl.classList[1] === 'fade-down') {
+  if (asideEl.classList[1] === 'fade-down' && asideContainer.classList[1] === 'fade-down') {
     asideEl.classList.remove('fade-down');
     asideEl.classList.add('fade-up');
+    asideContainer.classList.remove('fade-down');
+    asideContainer.classList.add('fade-up');
+
   }
   else {
     asideEl.classList.remove('fade-up');
     asideEl.classList.add('fade-down');
+    asideContainer.classList.remove('fade-up');
+    asideContainer.classList.add('fade-down');
   }
 })
+
+
+
 
 function createNewColor() {
   let r = Math.floor(Math.random() * 255) + 1;

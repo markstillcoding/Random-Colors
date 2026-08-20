@@ -153,12 +153,16 @@ h1 {
 }
 
 .fade-down {
-  animation: slide-down .8s ease-in-out forwards;
+  animation: slide-down 1s ease-in-out forwards;
 }
 
 .fade-up {
-  animation: slide-up .8s ease-in-out forwards;
+  animation: slide-up 1s ease-in-out forwards;
 }
+
+
+
+
 
 .btn {
   display: block;
@@ -234,10 +238,26 @@ h1 {
   flex-wrap: wrap;
 
 }
+.aside-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  margin-right: auto;
+  gap: 30px;
+  height: 0;
+  opacity: 0;
+}
+
 .aside {
   width: 100%;
-  background-color: #333;
+  background-color: #999;
   margin-top: 125px;
+}
+.custom-box {
+  width: 100px;
+  height: 100px;
+  background-color: rebeccapurple;
 }
 
 
@@ -329,21 +349,32 @@ h1 {
 @keyframes slide-down {
   from {
     height: 0;
+    opacity: 0;
   }
 
   to {
     height: 150px;
-
+opacity: 1;
   }
 }
 
 @keyframes slide-up {
   from {
     height: 150px;
+    opacity: 1;
   }
 
   to {
     height: 0;
+    opacity: 0;
   }
 }
+
+
+
+
+
+
+
+
 
