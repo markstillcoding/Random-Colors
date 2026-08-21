@@ -7,6 +7,7 @@ const redInput = document.getElementById('red_input')
 const greenInput = document.getElementById('green_input')
 const blueInput = document.getElementById('blue_input')
 const asideContainer = document.querySelector('.aside-container');
+const customColorBtn = document.querySelector('.custom-btn');
 const generatedColors = [];
 const customColors = {};
 console.log(customColors);
@@ -22,12 +23,18 @@ const customBox = document.querySelector('.custom-box');
 inputRanges.addEventListener('input', (e) => {
   if (e.target === redInput) {
     redRange = e.target.value;
+    let redContent = document.querySelector('.red-label span');
+    redContent.textContent = e.target.value;
   }
   if (e.target === greenInput) {
     greenRange = e.target.value;
+    let greenContent = document.querySelector('.green-label span');
+    greenContent.textContent = e.target.value;
   }
   if (e.target === blueInput) {
     blueRange = e.target.value;
+    let blueContent = document.querySelector('.blue-label span');
+    blueContent.textContent = e.target.value;
   }
   const customColorRange = `rgb(${redRange}, ${greenRange}, ${blueRange})`;
   customBox.style.backgroundColor = customColorRange;
@@ -280,6 +287,7 @@ closeButton.addEventListener("click", () => {
 })
 
 createColorArray(undefined);
+colorCustomBtn.addEventListener('click', createColorArray())
 
 function getTextColor(color, originalSpan, hexSpan) {
   let colorNum = color.r * .299 + color.g * .587 + color.b * .114;
